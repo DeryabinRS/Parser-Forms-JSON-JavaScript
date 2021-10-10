@@ -13,7 +13,21 @@ class JsonParser{
             console.log(err)
         }
     }
-    async getName() {
 
+    getName() {
+        return this.json.name;
     }
+
+    getFields(){
+        return this.json.fields;
+    }
+
+    getButtons(){
+        return this.json.buttons;
+    }
+
+    getReferences(){
+        return this.json.buttons;
+    }
+    
 }
