@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
         card.append(card_body);
 
         //Create form
-        const form = document.createElement('form');
+        const form = document.createElement('form'); 
         card_body.appendChild(form)
 
         if(dataJson?.fields){
