@@ -13,21 +13,4 @@ class JsonParser{
             console.log(err)
         }
     }
-
-    getName() {
-        return this.json.name;
-    }
-
-    getFields(){
-        return this.json.fields;
-    }
-
-    getButtons(){
-        return this.json.buttons;
-    }
-
-    getReferences(){
-        return this.json.buttons;
-    }
-    
 }
