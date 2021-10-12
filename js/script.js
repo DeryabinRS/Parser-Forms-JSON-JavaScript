@@ -80,7 +80,6 @@ window.addEventListener('DOMContentLoaded', () => {
         const input = document.createElement('input');
         input.setAttribute('id', id);
         input.setAttribute('type', field.input.type);
-        console.log(field)
         if(field.input.placeholder){
             input.setAttribute('placeholder', field.input.placeholder);
         }
