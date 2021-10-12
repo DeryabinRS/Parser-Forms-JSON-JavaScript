@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     async function getDataJson(formName, fileName){
         //get data from JSON
-        const jsp = new JsonParser(`/json/${fileName}`);
+        const jsp = new JsonParser(`./json/${fileName}`);
         dataJson = await jsp.json
 
         assemblyForm(formName)
