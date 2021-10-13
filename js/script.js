@@ -62,35 +62,82 @@ window.addEventListener('DOMContentLoaded', () => {
 
             id = field?.label?.toLowerCase().replace(/\s/g, '_',)
             if(field.label){
-                assemblyLabel(wrapper, field.label, id);
+                const mask = field?.input?.mask && field?.input?.mask
+                assemblyLabel(wrapper, field.label, id, mask);
             }
             assemblyInput(wrapper, field, id)
 
         });
     }
 
-    function assemblyLabel(wrapper, text, id){
+    function assemblyLabel(wrapper, text, id, mask = null){
         const label = document.createElement('label');
         label.setAttribute('for', id);
         label.textContent = text;
+        if(mask){
+            label.textContent += ` (${mask})`
+        }
         wrapper.appendChild(label);
     }
 
     function assemblyInput(wrapper, field, id = ''){
-        const input = document.createElement('input');
+
+        let input;
+        switch(field.input.type){
+            case 'checkbox':
+                input = document.createElement('input'); 
+                console.log(132)
+                input.classList.add('form-check-input');
+                break;
+            case 'textarea':
+                input = document.createElement('textarea'); 
+                input.classList.add('form-control');
+                break;
+            case 'technology':
+                input = document.createElement('select');
+                if(field.input.multiple){
+                    input.setAttribute('multiple', true);
+                }
+                input.classList.add('form-select');
+                field.input.technologies.forEach((tehnology, index) => {
+                    const option = document.createElement('option');
+                    option.setAttribute('value', index);
+                    option.innerText = tehnology
+                    input.appendChild(option)
+                })
+                break;
+            default:
+                input = document.createElement('input');
+                input.classList.add('form-control');
+                if(field.input.type === 'color'){
+                    input.classList.add('form-control-color')
+                }
+                
+        }
+        
         input.setAttribute('id', id);
         input.setAttribute('type', field.input.type);
         if(field.input.placeholder){
             input.setAttribute('placeholder', field.input.placeholder);
         }
-        if(field.input.type === 'checkbox'){
-            input.classList.add('form-check-input')
-        }else{
-            input.classList.add('form-control')
-            if(field.input.type === 'color'){
-                input.classList.add('form-control-color')
-            }
+        if(field.input.required){
+            input.setAttribute('required', true);
         }
+        if(field.input.filetype){
+            const fileTypes = field.input.filetype.map(fileType => {
+                switch(fileType){
+                    case 'jpeg':
+                        return 'image/jpeg'
+                    case 'png':
+                        return 'image/png' 
+                    case 'pdf':
+                        return 'application/pdf'     
+                }
+            })
+            input.setAttribute('accept', fileTypes.join(', '));
+        }
+        
+
         wrapper.appendChild(input)
     }
 
