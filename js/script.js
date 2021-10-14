@@ -65,11 +65,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // id = field?.label?.toLowerCase().replace(/\s/g, '_',)
             id = `field_${index}`
+            const mask = field?.input?.mask && field?.input?.mask
+
             if(field.label){
-                const mask = field?.input?.mask && field?.input?.mask
                 assemblyLabel(wrapper, field.label, id, mask);
             }
-            assemblyInput(wrapper, field, id, index)
+
+            assemblyInput(wrapper, field, id, index, mask)
 
         });
     }
@@ -84,9 +86,9 @@ window.addEventListener('DOMContentLoaded', () => {
         wrapper.appendChild(label);
     }
 
-    function assemblyInput(wrapper, field, id = '', idEl = 0){
-
+    function assemblyInput(wrapper, field, id = '', idEl = 0, mask = ''){
         let input;
+        if(field.input.type === 'number') field.input.type = 'text'
         switch(field.input.type){
             case 'checkbox':
                 input = document.createElement('input'); 
@@ -105,6 +107,11 @@ window.addEventListener('DOMContentLoaded', () => {
             default:
                 input = document.createElement('input');
                 input.classList.add('form-control');
+        }
+
+        if(mask){
+            const im = new Inputmask(mask);
+            im.mask(input);
         }
         
         input.setAttribute('id', id);
