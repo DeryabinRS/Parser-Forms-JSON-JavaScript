@@ -7,6 +7,10 @@ window.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             getDataJson(e.target.innerText, e.target.dataset.href);
             app.innerHTML= ''
+            navLinks.forEach(link => {
+                link.classList.remove('active')
+            })
+            e.target.classList.add('active')
         });
     });
 
@@ -22,7 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function assemblyForm (formName) {
-
         const card = document.createElement('div');
         card.classList.add('card');
         app.append(card);
