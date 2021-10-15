@@ -63,9 +63,8 @@ window.addEventListener('DOMContentLoaded', () => {
             wrapper.classList.add('mb-3');
             block.appendChild(wrapper);
 
-            // id = field?.label?.toLowerCase().replace(/\s/g, '_',)
             id = `field_${index}`
-            const mask = field?.input?.mask && field?.input?.mask
+            const mask = field?.input?.mask
 
             if(field.label){
                 assemblyLabel(wrapper, field.label, id, mask);
