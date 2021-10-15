@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function assemblyInput(wrapper, field, id = '', idEl = 0, mask = ''){
         let input;
-        if(field.input.type === 'number') field.input.type = 'text'
+        if(field.input.type === 'number' && mask) field.input.type = 'text'
         switch(field.input.type){
             case 'checkbox':
                 input = document.createElement('input'); 
